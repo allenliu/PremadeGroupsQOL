@@ -3,6 +3,7 @@
 ## v0.2.0
 
 - **Party Keys section** at the top of the dungeon dropdown. Lists keystones held by you and your party members; clicking one populates the dungeon, difficulty, and title. Uses LibKeystone — interoperable with BigWigs, DBM, Details!, and other addons that embed it.
+- **Applicant sort by Mythic+ score (descending)** in the ApplicationViewer. Multi-applicant groups sort by the primary applier's score. Applies to all party members, not just the leader.
 
 ## v0.1.0
 

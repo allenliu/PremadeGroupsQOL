@@ -35,19 +35,23 @@ The dungeon dropdown shows a "Party Keys" section at the top listing keystones h
 
 Below the Party Keys section, the dungeon radios are filtered to M+-capable entries only (the default lists every dungeon in the category plus assorted standalone entries). **More** stays available at the bottom for the full unfiltered list (Heroic dungeons, etc.) via the ActivityFinder. Applied to the Dungeons category only — Raids and other categories are untouched.
 
-### 3. Title persists when you change dropdowns
+### 3. Applicants sorted by Mythic+ score
+
+Once you've listed a group, the ApplicationViewer sorts incoming applicants by primary member's Mythic+ score, descending. Multi-applicant groups (duos, trios) sort by the primary applier's score. Applies to all party members, not just the leader — non-leaders see the dimmed view with the same sorted order.
+
+### 4. Title persists when you change dropdowns
 
 Blizzard's default wipes the Title field on every dungeon or difficulty change. Both typed titles and auto-fills now stick. The field is re-auto-filled only when it's empty, so clearing it manually still lets the keystone-aware default come back.
 
-### 4. Difficulty stays put when you switch dungeons
+### 5. Difficulty stays put when you switch dungeons
 
 Blizzard's "best activity" picker means changing dungeon can flip Mythic+ → Mythic 0 (or worse, depending on your gear). Your difficulty selection now follows you to the next dungeon. Falls back to the default if the new dungeon doesn't offer the same difficulty. Re-clicking the same dungeon also no longer drifts.
 
-### 5. Dungeon persists after delisting
+### 6. Dungeon persists after delisting
 
 After listing a group, delisting, then reopening the panel, Blizzard snaps the dungeon back to whatever keystone is in your bag — usually not the one you were just listing. Your dungeon pick is now preserved across the delist-reopen cycle. Only kicks in once you've explicitly chosen a dungeon this session; first-ever open still respects the keystone default.
 
-### 6. Playstyle defaults to Competitive
+### 7. Playstyle defaults to Competitive
 
 Saves a click every time you open the panel to list a new group. Edit-mode (reopening to edit an active listing) still uses the listing's real playstyle.
 

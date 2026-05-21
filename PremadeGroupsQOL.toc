@@ -11,3 +11,4 @@ Libs\LibKeystone\LibKeystone.lua
 Core.lua
 Keystone.lua
 EntryCreation.lua
+ApplicationViewer.lua
