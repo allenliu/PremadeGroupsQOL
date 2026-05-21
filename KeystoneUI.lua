@@ -13,6 +13,9 @@ local function populateMenu(_, root)
         local who = key.isSelf and "You" or key.playerName
         local text = string.format("%s — %s +%d", who, key.dungeonName, key.level)
         root:CreateButton(text, function()
+            -- Signal the title hook to override its non-empty guard for this
+            -- one call. A key pick is explicit intent to refresh the title.
+            ns.titleForceFill = true
             LFGListEntryCreation_Select(
                 LFGListFrame.EntryCreation,
                 nil,
@@ -32,24 +35,18 @@ local function createUI()
     local panel = LFGListFrame and LFGListFrame.EntryCreation
     if not (panel and panel.GroupDropdown) then return end
 
-    local row = CreateFrame("Frame", "PGQOLKeyPickerRow", panel)
-    row:SetSize(360, 36)
-    row:SetPoint("BOTTOMLEFT", panel.GroupDropdown, "TOPLEFT", 0, 8)
+    -- Hide the "DUNGEONS" / category header. Redundant context (user just
+    -- picked the category) and we want its vertical space for the key picker.
+    if panel.Label then panel.Label:Hide() end
 
-    local label = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    label:SetPoint("TOPLEFT", row, "TOPLEFT", 0, 0)
-    label:SetText("Use Key")
-
-    dropdown = CreateFrame("DropdownButton", "PGQOLKeyDropdown", row, "WowStyle1DropdownTemplate")
-    dropdown:SetSize(220, 22)
-    dropdown:SetPoint("TOPLEFT", label, "BOTTOMLEFT", 0, -2)
-    dropdown:SetDefaultText("Select a key...")
+    dropdown = CreateFrame("DropdownButton", "PGQOLKeyDropdown", panel, "WowStyle1DropdownTemplate")
+    dropdown:SetSize(240, 22)
+    dropdown:SetPoint("BOTTOM", panel.GroupDropdown, "TOP", 0, 8)
+    dropdown:SetDefaultText("Use Key…")
     dropdown:SetupMenu(populateMenu)
 end
 
 ns.keystone = ns.keystone or {}
--- The dropdown's SetupMenu callback re-runs on every open, so on-change
--- notifications would only matter for an already-open menu. Cheap no-op.
 ns.keystone.onChange = function() end
 
 local loader = CreateFrame("Frame")

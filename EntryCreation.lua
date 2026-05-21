@@ -5,7 +5,9 @@ local addonName, ns = ...
 -- Name EditBox is securityDisableSetText: we can prevent fills but not
 -- restore. Rules:
 --   1. Skip when the box is non-empty (preserves user text and prior fills).
---   2. When we do fill, pass Enum.LFGEntryGeneralPlaystyle.None so the
+--   2. ns.titleForceFill (one-shot) overrides the non-empty guard. The
+--      key-picker click sets it to refresh the title on demand.
+--   3. When we do fill, pass Enum.LFGEntryGeneralPlaystyle.None so the
 --      auto-filled title doesn't include the playstyle name ("+20 Competitive"
 --      → "+20"). Guards mirror Blizzard's LFGList.lua:1303-1311 verbatim.
 -- =====================================================================
@@ -13,7 +15,11 @@ local addonName, ns = ...
 LFGListEntryCreation_SetTitleFromActivityInfo = function(self)
     local nameBox = self.Name
     local currentText = nameBox and nameBox:GetText() or ""
-    if currentText ~= "" then return end
+
+    local forceFill = ns.titleForceFill
+    ns.titleForceFill = false
+
+    if currentText ~= "" and not forceFill then return end
 
     if not self.selectedActivity or not self.selectedGroup or not self.selectedCategory then return end
     local activeEntryInfo = C_LFGList.GetActiveEntryInfo()
