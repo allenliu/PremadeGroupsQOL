@@ -4,6 +4,7 @@
 ## Version: 0.2.0
 ## Author: Allen Liu
 ## SavedVariables: PremadeGroupsQOLDB
+## X-Wago-ID: aNDMbJ6o
 
 Libs\LibStub\LibStub.lua
 Libs\LibKeystone\LibKeystone.lua

@@ -4,15 +4,25 @@ Quality-of-life fixes for the World of Warcraft Group Finder's "List a Group" pa
 
 ## Install
 
-### CurseForge
+### Via an addon manager (easiest)
 
-*Not yet published — coming later.*
+Search for `Premade Groups QOL` in any of:
 
-### From GitHub
+- [WoWUp](https://wowup.io)
+- [CurseForge app](https://www.curseforge.com/download/app)
+- [Wago app](https://addons.wago.io/download)
+
+Install with one click; updates are handled automatically.
+
+### Manual zip
+
+Download the latest from [CurseForge](https://www.curseforge.com/wow/addons/premadegroupsqol) or [Wago](https://addons.wago.io/addons/premadegroupsqol). Extract into `World of Warcraft/_retail_/Interface/AddOns/`, keeping the inner `PremadeGroupsQOL/` folder name.
+
+### From source
 
 **Option A — download a release**
 
-1. Grab the latest zip from the [Releases](https://github.com/allenliu/PremadeGroupsQOL/releases) page (or use **Code → Download ZIP** on the repo for the tip of `main`).
+1. Grab the latest zip from the [Releases](https://github.com/allenliu/PremadeGroupsQOL/releases) page (or **Code → Download ZIP** for the tip of `main`).
 2. Extract it. You'll get a folder named something like `PremadeGroupsQOL-main` or `PremadeGroupsQOL-1.0.0`; rename it to `PremadeGroupsQOL`.
 3. Move `PremadeGroupsQOL/` into `World of Warcraft/_retail_/Interface/AddOns/`.
 
