@@ -27,23 +27,27 @@ Then enable **Premade Groups QOL** in the AddOns list at character select. `/rel
 
 ## Improvements
 
-### 1. Dungeon dropdown shows only M+ keystone dungeons
+### 1. Party Keys dropdown
+
+A "Use Key" dropdown above the existing dungeon/activity dropdowns lists keystones held by you and your party members. Clicking one populates the dungeon and difficulty. Uses [LibKeystone](https://github.com/BigWigsMods/LibKeystone) for party broadcasts (also embedded by BigWigs, DBM, Details!, and most keystone addons — so any party member running one of those will appear here automatically).
+
+### 2. Dungeon dropdown shows only M+ keystone dungeons
 
 The default dropdown lists every dungeon in the category plus assorted standalone entries. The dropdown now filters to M+-capable entries only; **More** is always present at the bottom to reach the full unfiltered list (Heroic dungeons, etc.) via the ActivityFinder. Applied to the Dungeons category only — Raids and other categories are untouched.
 
-### 2. Title persists when you change dropdowns
+### 3. Title persists when you change dropdowns
 
 Blizzard's default wipes the Title field on every dungeon or difficulty change. Both typed titles and auto-fills now stick. The field is re-auto-filled only when it's empty, so clearing it manually still lets the keystone-aware default come back.
 
-### 3. Difficulty stays put when you switch dungeons
+### 4. Difficulty stays put when you switch dungeons
 
 Blizzard's "best activity" picker means changing dungeon can flip Mythic+ → Mythic 0 (or worse, depending on your gear). Your difficulty selection now follows you to the next dungeon. Falls back to the default if the new dungeon doesn't offer the same difficulty. Re-clicking the same dungeon also no longer drifts.
 
-### 4. Dungeon persists after delisting
+### 5. Dungeon persists after delisting
 
 After listing a group, delisting, then reopening the panel, Blizzard snaps the dungeon back to whatever keystone is in your bag — usually not the one you were just listing. Your dungeon pick is now preserved across the delist-reopen cycle. Only kicks in once you've explicitly chosen a dungeon this session; first-ever open still respects the keystone default.
 
-### 5. Playstyle defaults to Competitive
+### 6. Playstyle defaults to Competitive
 
 Saves a click every time you open the panel to list a new group. Edit-mode (reopening to edit an active listing) still uses the listing's real playstyle.
 
