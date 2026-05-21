@@ -27,9 +27,9 @@ Then enable **Premade Groups QOL** in the AddOns list at character select. `/rel
 
 ## Improvements
 
-### 1. Party Keys dropdown
+### 1. Party Keys in the dungeon dropdown
 
-A "Use Key" dropdown above the existing dungeon/activity dropdowns lists keystones held by you and your party members. Clicking one populates the dungeon and difficulty. Uses [LibKeystone](https://github.com/BigWigsMods/LibKeystone) for party broadcasts (also embedded by BigWigs, DBM, Details!, and most keystone addons — so any party member running one of those will appear here automatically).
+The dungeon dropdown shows a "Party Keys" section at the top listing keystones held by you and your party members. Clicking one populates the dungeon, difficulty, and title in one shot. Uses [LibKeystone](https://github.com/BigWigsMods/LibKeystone) for party broadcasts (also embedded by BigWigs, DBM, Details!, and most keystone addons — so any party member running one of those will appear here automatically).
 
 ### 2. Dungeon dropdown shows only M+ keystone dungeons
 

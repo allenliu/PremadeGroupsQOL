@@ -10,5 +10,4 @@ Libs\LibKeystone\LibKeystone.lua
 
 Core.lua
 Keystone.lua
-KeystoneUI.lua
 EntryCreation.lua

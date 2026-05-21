@@ -170,6 +170,33 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
 
         if not self.selectedCategory then return end
 
+        -- WowLFG: Party Keys section at the top of the dungeon dropdown.
+        -- Lists keystones held by self + party members (via LibKeystone).
+        -- A click sets titleForceFill so the title hook refreshes even when
+        -- the EditBox is non-empty, then calls Select to populate dungeon
+        -- and difficulty.
+        if self.selectedCategory == GROUP_FINDER_CATEGORY_ID_DUNGEONS then
+            local keys = ns.keystone and ns.keystone.GetAllKnownKeys() or {}
+            if #keys > 0 then
+                rootDescription:CreateTitle("Party Keys")
+                for _, key in ipairs(keys) do
+                    local who = key.isSelf and "You" or key.playerName
+                    local text = string.format("%s — %s +%d", who, key.dungeonName, key.level)
+                    rootDescription:CreateButton(text, function()
+                        ns.titleForceFill = true
+                        LFGListEntryCreation_Select(
+                            self,
+                            nil,
+                            GROUP_FINDER_CATEGORY_ID_DUNGEONS,
+                            key.groupID,
+                            key.activityID
+                        )
+                    end)
+                end
+                rootDescription:CreateDivider()
+            end
+        end
+
         local useMore = false
 
         local groups = C_LFGList.GetAvailableActivityGroups(self.selectedCategory, bit.bor(self.baseFilters, self.selectedFilters))
