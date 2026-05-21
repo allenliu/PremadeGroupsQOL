@@ -31,9 +31,9 @@ Then enable **Premade Groups QOL** in the AddOns list at character select. `/rel
 
 The dungeon dropdown shows a "Party Keys" section at the top listing keystones held by you and your party members. Clicking one populates the dungeon, difficulty, and title in one shot. Uses [LibKeystone](https://github.com/BigWigsMods/LibKeystone) for party broadcasts (also embedded by BigWigs, DBM, Details!, and most keystone addons — so any party member running one of those will appear here automatically).
 
-### 2. Dungeon dropdown shows only M+ keystone dungeons
+### 2. Dungeon list filtered to M+ keystone dungeons
 
-The default dropdown lists every dungeon in the category plus assorted standalone entries. The dropdown now filters to M+-capable entries only; **More** is always present at the bottom to reach the full unfiltered list (Heroic dungeons, etc.) via the ActivityFinder. Applied to the Dungeons category only — Raids and other categories are untouched.
+Below the Party Keys section, the dungeon radios are filtered to M+-capable entries only (the default lists every dungeon in the category plus assorted standalone entries). **More** stays available at the bottom for the full unfiltered list (Heroic dungeons, etc.) via the ActivityFinder. Applied to the Dungeons category only — Raids and other categories are untouched.
 
 ### 3. Title persists when you change dropdowns
 
