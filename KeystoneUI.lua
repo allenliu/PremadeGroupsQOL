@@ -35,10 +35,6 @@ local function createUI()
     local panel = LFGListFrame and LFGListFrame.EntryCreation
     if not (panel and panel.GroupDropdown) then return end
 
-    -- Hide the "DUNGEONS" / category header. Redundant context (user just
-    -- picked the category) and we want its vertical space for the key picker.
-    if panel.Label then panel.Label:Hide() end
-
     dropdown = CreateFrame("DropdownButton", "PGQOLKeyDropdown", panel, "WowStyle1DropdownTemplate")
     dropdown:SetSize(240, 22)
     dropdown:SetPoint("BOTTOM", panel.GroupDropdown, "TOP", 0, 8)
