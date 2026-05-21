@@ -1,0 +1,9 @@
+## Interface: 120005
+## Title: WowLFG
+## Notes: Quality-of-life fixes for the Group Finder's List a Group panel
+## Version: 0.1.0
+## Author: Allen Liu
+## SavedVariables: WowLFGDB
+
+Core.lua
+EntryCreation.lua

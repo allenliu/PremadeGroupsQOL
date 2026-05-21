@@ -1,0 +1,11 @@
+# Blizzard UI source dropped locally for reference (see README Development)
+.reference/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
