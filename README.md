@@ -1,4 +1,4 @@
-# WowLFG
+# PremadeGroupsQOL
 
 Quality-of-life fixes for the World of Warcraft Group Finder's "List a Group" panel. Targets Mythic+ pugging on retail (interface 120005, TWW 11.x).
 
@@ -12,18 +12,18 @@ Quality-of-life fixes for the World of Warcraft Group Finder's "List a Group" pa
 
 **Option A — download a release**
 
-1. Grab the latest zip from the [Releases](https://github.com/allenliu/wowlfg/releases) page (or use **Code → Download ZIP** on the repo for the tip of `main`).
-2. Extract it. You'll get a folder named something like `wowlfg-main` or `wowlfg-1.0.0`; rename it to `wowlfg`.
-3. Move `wowlfg/` into `World of Warcraft/_retail_/Interface/AddOns/`.
+1. Grab the latest zip from the [Releases](https://github.com/allenliu/PremadeGroupsQOL/releases) page (or use **Code → Download ZIP** on the repo for the tip of `main`).
+2. Extract it. You'll get a folder named something like `PremadeGroupsQOL-main` or `PremadeGroupsQOL-1.0.0`; rename it to `PremadeGroupsQOL`.
+3. Move `PremadeGroupsQOL/` into `World of Warcraft/_retail_/Interface/AddOns/`.
 
 **Option B — git clone**
 
 ```sh
 cd "World of Warcraft/_retail_/Interface/AddOns"
-git clone https://github.com/allenliu/wowlfg.git
+git clone https://github.com/allenliu/PremadeGroupsQOL.git
 ```
 
-Then enable **WowLFG** in the AddOns list at character select. `/reload` in-game if it doesn't pick up automatically.
+Then enable **Premade Groups QOL** in the AddOns list at character select. `/reload` in-game if it doesn't pick up automatically.
 
 ## Improvements
 
