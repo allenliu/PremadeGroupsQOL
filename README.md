@@ -51,4 +51,4 @@ Saves a click every time you open the panel to list a new group. Edit-mode (reop
 
 The addon hooks `LFGListEntryCreation_*` global functions. The Name EditBox has `securityDisableSetText`, so the title strategy is "prevent, don't restore." Anything touching the secure listing path (apply, invite, create) is left alone to avoid tainting the **List Group** button.
 
-Blizzard's UI source — invaluable when reading hook targets — lives at [Gethe/wow-ui-source](https://github.com/Gethe/wow-ui-source/tree/live/Interface/AddOns/Blizzard_GroupFinder/Mainline). Drop local copies into `.reference/` (gitignored) if you want offline lookup.
+Blizzard's UI source — invaluable when reading hook targets — lives at [Gethe/wow-ui-source](https://github.com/Gethe/wow-ui-source/tree/live/Interface/AddOns/Blizzard_GroupFinder/Mainline).
