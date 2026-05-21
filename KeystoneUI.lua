@@ -33,11 +33,17 @@ end
 local function createUI()
     if dropdown then return end
     local panel = LFGListFrame and LFGListFrame.EntryCreation
-    if not (panel and panel.GroupDropdown) then return end
+    if not (panel and panel.GroupDropdown and panel.NameLabel) then return end
+
+    -- Free 30px above NameLabel for the key picker. NameLabel was anchored
+    -- TOPLEFT x=20, y=-120 in LFGList.xml. Shifting it cascades to the Title
+    -- EditBox and (via $parent.NameLabel) DescriptionLabel + everything below.
+    panel.NameLabel:ClearAllPoints()
+    panel.NameLabel:SetPoint("TOPLEFT", panel, "TOPLEFT", 20, -150)
 
     dropdown = CreateFrame("DropdownButton", "PGQOLKeyDropdown", panel, "WowStyle1DropdownTemplate")
     dropdown:SetSize(240, 22)
-    dropdown:SetPoint("BOTTOM", panel.GroupDropdown, "TOP", 0, 8)
+    dropdown:SetPoint("TOPLEFT", panel.GroupDropdown, "BOTTOMLEFT", 0, -8)
     dropdown:SetDefaultText("Use Key…")
     dropdown:SetupMenu(populateMenu)
 end
