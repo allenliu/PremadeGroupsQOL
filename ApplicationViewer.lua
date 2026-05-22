@@ -31,3 +31,44 @@ hooksecurefunc("LFGListApplicationViewer_UpdateResultList", function(self)
     if not self.applicants then return end
     table.sort(self.applicants, compareApplicants)
 end)
+
+-- =====================================================================
+-- [OCE] badge on applicant member names
+-- Realms in the US datacenter that belong to the Oceanic group. Used to
+-- visually flag applicants likely to have low latency in OCE-led groups.
+-- Update this list if Blizzard renames or adds OCE realms.
+-- =====================================================================
+
+local OCE_REALMS = {
+    ["Aman'Thul"]   = true,
+    ["Barthilas"]   = true,
+    ["Caelestrasz"] = true,
+    ["Dath'Remar"]  = true,
+    ["Dreadmaul"]   = true,
+    ["Frostmourne"] = true,
+    ["Gundrak"]     = true,
+    ["Jubei'Thos"]  = true,
+    ["Khaz'goroth"] = true,
+    ["Nagrand"]     = true,
+    ["Saurfang"]    = true,
+    ["Thaurissan"]  = true,
+}
+
+local function isOCEName(name)
+    if not name or name == "" then return false end
+    -- Cross-realm names look like "PlayerName-Realm"; same-realm names
+    -- drop the suffix, so we fall back to the player's own realm.
+    local realm = name:match("%-(.+)$") or GetRealmName()
+    return OCE_REALMS[realm] == true
+end
+
+hooksecurefunc("LFGListApplicationViewer_UpdateApplicantMember", function(member, appID, memberIdx)
+    if not (member and member.Name) then return end
+    local name = C_LFGList.GetApplicantMemberInfo(appID, memberIdx)
+    if not isOCEName(name) then return end
+
+    local current = member.Name:GetText() or ""
+    if not current:find("%[OCE%]") then
+        member.Name:SetText(current .. " [OCE]")
+    end
+end)
