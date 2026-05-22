@@ -136,7 +136,46 @@ hooksecurefunc("LFGListEntryCreation_Clear", function(self)
         -- is "Carry Offered" despite its enum name.
         self.generalPlaystyle = Enum.LFGEntryGeneralPlaystyle.FunSerious
     end
+    if ns.HideTitleHint then ns.HideTitleHint() end
 end)
+
+-- =====================================================================
+-- Title hint label
+-- Created lazily on first need. Shown next to the "Title" header when
+-- the user picks a party member's key, indicating the level they need
+-- to type (since the field can't be filled programmatically). Hides as
+-- soon as they start typing.
+-- =====================================================================
+
+local titleHint
+
+local function ensureTitleHint()
+    if titleHint then return titleHint end
+    local panel = LFGListFrame and LFGListFrame.EntryCreation
+    if not (panel and panel.NameLabel and panel.Name) then return nil end
+
+    titleHint = panel:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+    titleHint:SetPoint("LEFT", panel.NameLabel, "RIGHT", 8, 0)
+    titleHint:SetTextColor(0.4, 1, 0.4)
+    titleHint:Hide()
+
+    panel.Name:HookScript("OnTextChanged", function(_, userInput)
+        if userInput and titleHint then titleHint:Hide() end
+    end)
+
+    return titleHint
+end
+
+function ns.ShowTitleHint(text)
+    local lbl = ensureTitleHint()
+    if not lbl then return end
+    lbl:SetText("← type  " .. text)
+    lbl:Show()
+end
+
+function ns.HideTitleHint()
+    if titleHint then titleHint:Hide() end
+end
 
 -- WowStyle1Dropdown's displayed label is updated via SignalUpdate, NOT
 -- GenerateMenu. Re-poll the radios so the visible label reflects whatever
@@ -206,15 +245,21 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                             key.activityID
                         )
                         if not key.isSelf then
-                            -- securityDisableSetText blocks SetText(), but the
-                            -- user-input path (HighlightText to select, then
-                            -- Insert to replace) is usually not blocked.
+                            -- securityDisableSetText blocks both SetText AND
+                            -- Insert, so we can't programmatically fill the
+                            -- title. Best we can do: focus + select existing
+                            -- text so any keystroke replaces it, and show a
+                            -- hint label with the level the user should type.
                             local nameBox = self.Name
                             if nameBox then
+                                nameBox:SetFocus()
                                 nameBox:HighlightText()
-                                nameBox:Insert("+" .. key.level)
-                                nameBox:HighlightText(0, 0)
                             end
+                            if ns.ShowTitleHint then
+                                ns.ShowTitleHint("+" .. key.level)
+                            end
+                        else
+                            if ns.HideTitleHint then ns.HideTitleHint() end
                         end
                     end)
                 end
