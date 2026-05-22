@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.3
+
+- **[OCE] badge** on applicant member names in the ApplicationViewer. Tags every member of a multi-applicant individually based on their realm.
+
 ## v0.2.2
 
 - Fix: delist-then-relist no longer restores a stale dungeon (a prior regular-dropdown pick) over the party-key dungeon you actually listed. Party-key picks now correctly stamp the dungeon/activity trackers.
