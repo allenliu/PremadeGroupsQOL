@@ -4,10 +4,13 @@ local addonName, ns = ...
 -- Title generation
 -- Name EditBox is securityDisableSetText: we can prevent fills but not
 -- restore. Rules:
---   1. Skip when the box is non-empty (preserves user text and prior fills).
---   2. ns.titleForceFill (one-shot) overrides the non-empty guard. The
---      key-picker click sets it to refresh the title on demand.
---   3. When we do fill, pass Enum.LFGEntryGeneralPlaystyle.None so the
+--   1. ns.titleSuppress (one-shot) skips the fill entirely. Used when
+--      picking a party member's key — C_LFGList.SetEntryTitle would use
+--      our own keystone level, not theirs, so the result is misleading.
+--   2. Skip when the box is non-empty (preserves user text and prior fills).
+--   3. ns.titleForceFill (one-shot) overrides the non-empty guard. The
+--      self-key picker click sets it to refresh the title on demand.
+--   4. When we do fill, pass Enum.LFGEntryGeneralPlaystyle.None so the
 --      auto-filled title doesn't include the playstyle name ("+20 Competitive"
 --      → "+20"). Guards mirror Blizzard's LFGList.lua:1303-1311 verbatim.
 -- =====================================================================
@@ -17,8 +20,11 @@ LFGListEntryCreation_SetTitleFromActivityInfo = function(self)
     local currentText = nameBox and nameBox:GetText() or ""
 
     local forceFill = ns.titleForceFill
+    local suppress = ns.titleSuppress
     ns.titleForceFill = false
+    ns.titleSuppress = false
 
+    if suppress then return end
     if currentText ~= "" and not forceFill then return end
 
     if not self.selectedActivity or not self.selectedGroup or not self.selectedCategory then return end
@@ -183,7 +189,15 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                     local who = key.isSelf and "You" or key.playerName
                     local text = string.format("%s — %s +%d", who, key.dungeonName, key.level)
                     rootDescription:CreateButton(text, function()
-                        ns.titleForceFill = true
+                        if key.isSelf then
+                            ns.titleForceFill = true
+                        else
+                            -- Party member's key: skip title fill. The C-side
+                            -- title generator reads OUR keystone level, not
+                            -- theirs, so the title would be wrong. User edits
+                            -- manually (the dropdown text shows their level).
+                            ns.titleSuppress = true
+                        end
                         LFGListEntryCreation_Select(
                             self,
                             nil,
