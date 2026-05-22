@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.1
+
+- Party Keys: picking a party member's key now focuses the title field and selects existing text so you can type their level in a few keystrokes. A green `+N` hint next to the "Title" label shows what to type.
+- The hint is skipped when the title's leading number already matches the picked key's level (`+10` title + pick `+10` key = silent).
+- The hint clears automatically when you pick a regular dungeon or activity, or start typing.
+- Fix: title auto-fill no longer wrongly fires for party members' keys (it was using your own keystone level, producing empty or wrong values).
+
 ## v0.2.0
 
 - **Party Keys section** at the top of the dungeon dropdown. Lists keystones held by you and your party members; clicking one populates the dungeon, difficulty, and title. Uses LibKeystone — interoperable with BigWigs, DBM, Details!, and other addons that embed it.
