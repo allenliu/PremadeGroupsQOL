@@ -108,6 +108,11 @@ LFGListEntryCreation_Select = function(self, filters, categoryID, groupID, activ
     if userGroupPick then
         userGroupID = groupID
     end
+
+    -- Hide the title hint on any Select call (e.g. user picks a regular
+    -- dungeon/activity radio). The party-key click handler re-shows it
+    -- AFTER calling Select, so this doesn't fight the intended display.
+    if ns.HideTitleHint then ns.HideTitleHint() end
 end
 
 -- Restore the user's chosen dungeon after SetEditMode(false)'s keystone
