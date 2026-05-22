@@ -169,7 +169,7 @@ end
 function ns.ShowTitleHint(text)
     local lbl = ensureTitleHint()
     if not lbl then return end
-    lbl:SetText("← type  " .. text)
+    lbl:SetText(text)
     lbl:Show()
 end
 
