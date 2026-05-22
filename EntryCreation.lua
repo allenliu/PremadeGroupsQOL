@@ -255,13 +255,19 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                             -- title. Best we can do: focus + select existing
                             -- text so any keystroke replaces it, and show a
                             -- hint label with the level the user should type.
+                            -- Skip both if the title's leading number already
+                            -- matches the picked key's level.
                             local nameBox = self.Name
-                            if nameBox then
-                                nameBox:SetFocus()
-                                nameBox:HighlightText()
-                            end
-                            if ns.ShowTitleHint then
-                                ns.ShowTitleHint("+" .. key.level)
+                            local currentText = nameBox and nameBox:GetText() or ""
+                            local leadingNum = tonumber(currentText:match("^%s*%+?(%d+)"))
+                            if leadingNum ~= key.level then
+                                if nameBox then
+                                    nameBox:SetFocus()
+                                    nameBox:HighlightText()
+                                end
+                                if ns.ShowTitleHint then
+                                    ns.ShowTitleHint("+" .. key.level)
+                                end
                             end
                         else
                             if ns.HideTitleHint then ns.HideTitleHint() end
