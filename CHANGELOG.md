@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.4
+
+- First release on CurseForge.
+
 ## v0.2.3
 
 - **[OCE] badge** on applicant member names in the ApplicationViewer. Tags every member of a multi-applicant individually based on their realm.
