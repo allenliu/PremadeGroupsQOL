@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.2
+
+- Fix: delist-then-relist no longer restores a stale dungeon (a prior regular-dropdown pick) over the party-key dungeon you actually listed. Party-key picks now correctly stamp the dungeon/activity trackers.
+
 ## v0.2.1
 
 - Party Keys: picking a party member's key now focuses the title field and selects existing text so you can type their level in a few keystrokes. A green `+N` hint next to the "Title" label shows what to type.
