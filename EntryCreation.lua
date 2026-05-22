@@ -190,12 +190,12 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                     local text = string.format("%s — %s +%d", who, key.dungeonName, key.level)
                     rootDescription:CreateButton(text, function()
                         if key.isSelf then
+                            -- Our own key: let the C-side fill produce "+<myLevel>"
                             ns.titleForceFill = true
                         else
-                            -- Party member's key: skip title fill. The C-side
-                            -- title generator reads OUR keystone level, not
-                            -- theirs, so the title would be wrong. User edits
-                            -- manually (the dropdown text shows their level).
+                            -- Party member's key: C-side fill returns empty
+                            -- (doesn't match our own keystone). Suppress it,
+                            -- then write the picker's level via Insert below.
                             ns.titleSuppress = true
                         end
                         LFGListEntryCreation_Select(
@@ -205,6 +205,17 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                             key.groupID,
                             key.activityID
                         )
+                        if not key.isSelf then
+                            -- securityDisableSetText blocks SetText(), but the
+                            -- user-input path (HighlightText to select, then
+                            -- Insert to replace) is usually not blocked.
+                            local nameBox = self.Name
+                            if nameBox then
+                                nameBox:HighlightText()
+                                nameBox:Insert("+" .. key.level)
+                                nameBox:HighlightText(0, 0)
+                            end
+                        end
                     end)
                 end
                 rootDescription:CreateDivider()
