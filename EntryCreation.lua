@@ -249,6 +249,14 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                             key.groupID,
                             key.activityID
                         )
+                        -- Key-picker clicks are explicit user choices, but
+                        -- the Select wrapper sees both groupID and activityID
+                        -- and classifies them as systemCall (so it skips the
+                        -- tracker updates). Stamp the trackers ourselves so
+                        -- the delist-reopen restoration uses this dungeon,
+                        -- not a stale prior pick.
+                        userGroupID = key.groupID
+                        viewActivityID = key.activityID
                         if not key.isSelf then
                             -- securityDisableSetText blocks both SetText AND
                             -- Insert, so we can't programmatically fill the
