@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.5
+
+- Fix: `[OCE]` tag was missing on some OCE-realm applicants when the realm suffix arrived asynchronously. The decision is now cached per applicant so the tag survives Blizzard's later text refreshes.
+
 ## v0.2.4
 
 - First release on CurseForge.

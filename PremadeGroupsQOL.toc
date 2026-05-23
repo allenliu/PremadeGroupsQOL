@@ -1,7 +1,7 @@
 ## Interface: 120005
 ## Title: Premade Groups QOL
 ## Notes: Quality-of-life fixes for the Group Finder's List a Group panel
-## Version: 0.2.4
+## Version: 0.2.5
 ## Author: Allen Liu
 ## SavedVariables: PremadeGroupsQOLDB
 ## X-Wago-ID: aNDMbJ6o
