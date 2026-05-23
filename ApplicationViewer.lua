@@ -62,13 +62,39 @@ local function isOCEName(name)
     return OCE_REALMS[realm] == true
 end
 
+-- Cache OCE determinations per (applicantID, memberIdx) so we don't lose the
+-- tag once we've confirmed it. The applicant's name from GetApplicantMemberInfo
+-- can arrive in stages (the realm suffix may load later than the character
+-- name). Without the cache, a hook fire that catches the partial state would
+-- evaluate to non-OCE, and any subsequent SetText from Blizzard would erase a
+-- tag that an earlier full-data fire had applied.
+--
+-- Only positive determinations are cached (key present = OCE). For absent
+-- keys we always re-evaluate, so a later fire with full data can promote the
+-- applicant to OCE. The cache is cleared whenever our listing changes.
+local oceCache = {}
+
 hooksecurefunc("LFGListApplicationViewer_UpdateApplicantMember", function(member, appID, memberIdx)
     if not (member and member.Name) then return end
-    local name = C_LFGList.GetApplicantMemberInfo(appID, memberIdx)
-    if not isOCEName(name) then return end
+    local key = appID .. ":" .. memberIdx
 
-    local current = member.Name:GetText() or ""
-    if not current:find("%[OCE%]") then
-        member.Name:SetText(current .. " [OCE]")
+    if not oceCache[key] then
+        local name = C_LFGList.GetApplicantMemberInfo(appID, memberIdx)
+        if isOCEName(name) then
+            oceCache[key] = true
+        end
     end
+
+    if oceCache[key] then
+        local current = member.Name:GetText() or ""
+        if not current:find("%[OCE%]") then
+            member.Name:SetText(current .. " [OCE]")
+        end
+    end
+end)
+
+local oceCacheFrame = CreateFrame("Frame")
+oceCacheFrame:RegisterEvent("LFG_LIST_ACTIVE_ENTRY_UPDATE")
+oceCacheFrame:SetScript("OnEvent", function()
+    wipe(oceCache)
 end)
