@@ -33,7 +33,11 @@ LFGListEntryCreation_SetTitleFromActivityInfo = function(self)
     local activityInfo = C_LFGList.GetActivityInfoTable(activityID)
     if (activityInfo and activityInfo.isMythicPlusActivity)
        or IsActivityLockedForCustomText(self.selectedCategory, self.selectedActivity) then
-        C_LFGList.SetEntryTitle(self.selectedActivity, self.selectedGroup, self.selectedPlaystyle, Enum.LFGEntryGeneralPlaystyle.None)
+        if ns.db and ns.db.settings.stripPlaystyleFromTitle then
+            C_LFGList.SetEntryTitle(self.selectedActivity, self.selectedGroup, self.selectedPlaystyle, Enum.LFGEntryGeneralPlaystyle.None)
+        else
+            C_LFGList.SetEntryTitle(self.selectedActivity, self.selectedGroup, self.selectedPlaystyle)
+        end
     end
 end
 
@@ -138,8 +142,12 @@ hooksecurefunc("LFGListEntryCreation_Clear", function(self)
     userGroupID = nil
     if not C_LFGList.GetActiveEntryInfo() then
         -- FunSerious = the 3rd radio = "Competitive". The 4th (Expert)
-        -- is "Carry Offered" despite its enum name.
-        self.generalPlaystyle = Enum.LFGEntryGeneralPlaystyle.FunSerious
+        -- is "Carry Offered" despite its enum name. None = leave Blizzard's
+        -- default in place (user opted out via settings).
+        local choice = ns.db and ns.db.settings.defaultPlaystyle
+        if choice and choice ~= Enum.LFGEntryGeneralPlaystyle.None then
+            self.generalPlaystyle = choice
+        end
     end
     if ns.HideTitleHint then ns.HideTitleHint() end
 end)

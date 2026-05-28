@@ -11,6 +11,7 @@ Libs\LibStub\LibStub.lua
 Libs\LibKeystone\LibKeystone.lua
 
 Core.lua
+Settings.lua
 Keystone.lua
 EntryCreation.lua
 ApplicationViewer.lua

@@ -29,6 +29,7 @@ end
 
 hooksecurefunc("LFGListApplicationViewer_UpdateResultList", function(self)
     if not self.applicants then return end
+    if not (ns.db and ns.db.settings.sortApplicantsByScore) then return end
     table.sort(self.applicants, compareApplicants)
 end)
 
@@ -76,6 +77,7 @@ local oceCache = {}
 
 hooksecurefunc("LFGListApplicationViewer_UpdateApplicantMember", function(member, appID, memberIdx)
     if not (member and member.Name) then return end
+    if not (ns.db and ns.db.settings.showOCEBadge) then return end
     local key = appID .. ":" .. memberIdx
 
     if not oceCache[key] then
