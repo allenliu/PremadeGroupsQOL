@@ -1,6 +1,6 @@
 # PremadeGroupsQOL
 
-Quality-of-life fixes for the World of Warcraft Group Finder's "List a Group" panel. Targets Mythic+ pugging on retail (interface 120005, TWW 11.x).
+Quality-of-life fixes for the World of Warcraft Group Finder's "List a Group" panel. Targets Mythic+ pugging on retail (interface 120005, 120007, TWW 11.x).
 
 ## Install
 
