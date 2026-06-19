@@ -14,6 +14,10 @@ local DEFAULTS = {
 }
 ns.DEFAULTS = DEFAULTS
 
+-- Enum.LFGEntryGeneralPlaystyle.None may be nil in some patch versions;
+-- 0 is its documented numeric value and is safe to use directly.
+ns.PLAYSTYLE_NONE = (Enum.LFGEntryGeneralPlaystyle and Enum.LFGEntryGeneralPlaystyle.None) or 0
+
 local loader = CreateFrame("Frame")
 loader:RegisterEvent("ADDON_LOADED")
 loader:SetScript("OnEvent", function(self, event, name)

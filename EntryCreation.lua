@@ -10,7 +10,7 @@ local addonName, ns = ...
 --   2. Skip when the box is non-empty (preserves user text and prior fills).
 --   3. ns.titleForceFill (one-shot) overrides the non-empty guard. The
 --      self-key picker click sets it to refresh the title on demand.
---   4. When we do fill, pass Enum.LFGEntryGeneralPlaystyle.None so the
+--   4. When we do fill, pass ns.PLAYSTYLE_NONE so the
 --      auto-filled title doesn't include the playstyle name ("+20 Competitive"
 --      → "+20"). Guards mirror Blizzard's LFGList.lua:1303-1311 verbatim.
 -- =====================================================================
@@ -34,7 +34,7 @@ LFGListEntryCreation_SetTitleFromActivityInfo = function(self)
     if (activityInfo and activityInfo.isMythicPlusActivity)
        or IsActivityLockedForCustomText(self.selectedCategory, self.selectedActivity) then
         if ns.db and ns.db.settings.stripPlaystyleFromTitle then
-            C_LFGList.SetEntryTitle(self.selectedActivity, self.selectedGroup, self.selectedPlaystyle, Enum.LFGEntryGeneralPlaystyle.None)
+            C_LFGList.SetEntryTitle(self.selectedActivity, self.selectedGroup, self.selectedPlaystyle, ns.PLAYSTYLE_NONE)
         else
             C_LFGList.SetEntryTitle(self.selectedActivity, self.selectedGroup, self.selectedPlaystyle)
         end
@@ -145,7 +145,7 @@ hooksecurefunc("LFGListEntryCreation_Clear", function(self)
         -- is "Carry Offered" despite its enum name. None = leave Blizzard's
         -- default in place (user opted out via settings).
         local choice = ns.db and ns.db.settings.defaultPlaystyle
-        if choice and choice ~= Enum.LFGEntryGeneralPlaystyle.None then
+        if choice and choice ~= ns.PLAYSTYLE_NONE then
             self.generalPlaystyle = choice
         end
     end
@@ -266,21 +266,15 @@ LFGListEntryCreation_SetupGroupDropdown = function(self)
                         userGroupID = key.groupID
                         viewActivityID = key.activityID
                         if not key.isSelf then
-                            -- securityDisableSetText blocks both SetText AND
-                            -- Insert, so we can't programmatically fill the
-                            -- title. Best we can do: focus + select existing
-                            -- text so any keystroke replaces it, and show a
-                            -- hint label with the level the user should type.
-                            -- Skip both if the title's leading number already
-                            -- matches the picked key's level.
+                            -- securityDisableSetText blocks SetText and Insert,
+                            -- and SetFocus/HighlightText on this frame taints
+                            -- the EditBox causing the same restriction to fire
+                            -- on WoW's own Insert calls. Show the hint label
+                            -- only; the user types the level manually.
                             local nameBox = self.Name
                             local currentText = nameBox and nameBox:GetText() or ""
                             local leadingNum = tonumber(currentText:match("^%s*%+?(%d+)"))
                             if leadingNum ~= key.level then
-                                if nameBox then
-                                    nameBox:SetFocus()
-                                    nameBox:HighlightText()
-                                end
                                 if ns.ShowTitleHint then
                                     ns.ShowTitleHint("+" .. key.level)
                                 end

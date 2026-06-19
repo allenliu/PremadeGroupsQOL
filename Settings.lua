@@ -46,7 +46,7 @@ local function buildPanel()
             category, playstyleSetting,
             function()
                 local container = Settings.CreateControlTextContainer()
-                container:Add(Enum.LFGEntryGeneralPlaystyle.None,       "Don't override")
+                container:Add(ns.PLAYSTYLE_NONE,                         "Don't override")
                 container:Add(Enum.LFGEntryGeneralPlaystyle.Standard,   "Standard")
                 container:Add(Enum.LFGEntryGeneralPlaystyle.FunSerious, "Competitive")
                 container:Add(Enum.LFGEntryGeneralPlaystyle.Expert,     "Carry Offered")
