@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.3
+
+- Update for patch 12.1.0 (interface 120100). No code changes needed — 12.1 only added new `C_LFGList` APIs; nothing the addon uses was changed or removed.
+
 ## v0.2.5
 
 - Fix: `[OCE]` tag was missing on some OCE-realm applicants when the realm suffix arrived asynchronously. The decision is now cached per applicant so the tag survives Blizzard's later text refreshes.
