@@ -4,6 +4,19 @@
 
 - Update for patch 12.1.0 (interface 120100). No code changes needed — 12.1 only added new `C_LFGList` APIs; nothing the addon uses was changed or removed.
 
+## v0.3.2
+
+- Fix: the "Default playstyle" settings dropdown could throw a Lua error on 12.0.7, where `Enum.LFGEntryGeneralPlaystyle.None` can be nil. The "Don't override" option now uses the documented numeric value directly.
+- Fix: picking a party member's key no longer breaks typing in the title field. The focus-and-select behavior from v0.2.1 tainted the EditBox, which made Blizzard's security block subsequent keystrokes; now only the green `+N` hint is shown and you click the field yourself.
+
+## v0.3.1
+
+- Update for patch 12.0.7 (interface 120007). No code changes.
+
+## v0.3.0
+
+- **Settings panel** at Esc → Settings → AddOns → Premade Groups QOL, also opened by `/pgqol`. Toggles for the applicant sort by M+ score, the `[OCE]` badge, and stripping the playstyle name from auto-filled titles (`+20` instead of `+20 Competitive`), plus a dropdown for the default playstyle on new listings (Don't override / Standard / Competitive / Carry Offered). Defaults preserve the previous behavior.
+
 ## v0.2.5
 
 - Fix: `[OCE]` tag was missing on some OCE-realm applicants when the realm suffix arrived asynchronously. The decision is now cached per applicant so the tag survives Blizzard's later text refreshes.
